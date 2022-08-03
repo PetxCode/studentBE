@@ -211,7 +211,7 @@ const signinUser = async (req, res) => {
             { token: accessToken },
             { new: true }
           );
-          verifiedSignUser(email, user, accessToken)
+          verifiedSignUser(email, user._id, accessToken)
             .then((result) => {
               console.log("message sent again: ", result);
             })
