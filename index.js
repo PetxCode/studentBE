@@ -4,9 +4,8 @@ const http = require("http");
 const app = express();
 const server = http.createServer(app);
 const socket = require("socket.io");
-const { default: mongoose } = require("mongoose");
 const io = socket(server);
-const mongoose = require("./utils/db");
+require("./utils/db");
 const room = {};
 
 app.use(cors());
@@ -21,8 +20,8 @@ app.use("/api/interest", require("./router/interestRoute"));
 app.use("/api/software", require("./router/softwareRoute"));
 app.use("/api/project", require("./router/projectRoute"));
 
-const db = mongoose.connection;
-const observer = db.collection("user").watch();
+// const db = mongoose.connection;
+// const observer = db.collection("user").watch();
 
 observer.on("change", (data) => {});
 
