@@ -306,6 +306,5 @@ module.exports = {
   createUser,
   viewUser,
   signinUser,
-  //   deleteMember,
   updateUserLogo,
 };

@@ -1,9 +1,9 @@
 const cloudinary = require("cloudinary").v2;
 
 cloudinary.config({
-  cloud_name: "dv4dlmp4e",
-  api_key: "464513458841612",
-  api_secret: "VxFfeGaNMPPudxcq0GWcsh6zfRk",
+  cloud_name: "newcodelabstudents24",
+  api_key: "631571737476252",
+  api_secret: "5JuVB7MjtouQqRrKU3zAjRg81zY",
   secure: true,
 });
 

@@ -11,7 +11,7 @@ const room = {};
 app.use(cors());
 app.use(express.json());
 
-app.get((req, res) => {
+app.get("/", (req, res) => {
   res.status(200).json({ message: "This is a new built for Students" });
 });
 
