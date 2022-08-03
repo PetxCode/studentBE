@@ -5,7 +5,7 @@ const {
   changePassword,
   resetPassword,
   deleteUser,
-  updateUserInfo,
+  onlineInfo,
   updateUserImage,
   viewUsers,
   verifyUser,
@@ -27,6 +27,8 @@ router.route("/change/:id/:token").post(changePassword);
 
 router.route("/:id/image").patch(upload, updateUserImage);
 
-router.route("/:id").get(viewUser).patch(updateUserInfo).delete(deleteUser);
+router.route("/:id/online").patch(onlineInfo);
+router.route("/:id").get(viewUser).delete(deleteUser);
+router.route("/:id").get(viewUser).delete(deleteUser);
 
 module.exports = router;

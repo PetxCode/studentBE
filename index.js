@@ -23,7 +23,7 @@ app.use("/api/project", require("./router/projectRoute"));
 // const db = mongoose.connection;
 // const observer = db.collection("user").watch();
 
-observer.on("change", (data) => {});
+// observer.on("change", (data) => {});
 
 server.listen(process.env.PORT || 2400, () => {
   console.log("server is now running");

@@ -299,7 +299,7 @@ module.exports = {
   changePassword,
   resetPassword,
   deleteUser,
-  updateUserInfo,
+  onlineInfo,
   updateUserImage,
   viewUsers,
   verifyUser,
@@ -307,6 +307,5 @@ module.exports = {
   viewUser,
   signinUser,
   //   deleteMember,
-  viewUserMembers,
   updateUserLogo,
 };
