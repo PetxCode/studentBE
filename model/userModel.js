@@ -8,6 +8,9 @@ const userModel = mongoose.Schema(
     verified: {
       type: Boolean,
     },
+    online: {
+      type: Boolean,
+    },
     secret: {
       type: String,
     },

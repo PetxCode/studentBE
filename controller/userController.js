@@ -2,8 +2,6 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const userModel = require("../model/userModel");
 
-// const memberModel = require("../model/memberModel");
-
 const cloudinary = require("../utils/cloudinary");
 const crypto = require("crypto");
 const {
@@ -23,34 +21,6 @@ const viewUsers = async (req, res) => {
     res.status(404).json({ message: error.message });
   }
 };
-
-const viewUserMembers = async (req, res) => {
-  try {
-    const view = await userModel
-      .findById(req.params.id)
-      .populate({ path: "member", options: { createdAt: -1 } });
-    res.status(200).json({
-      message: "found",
-      data: view,
-    });
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
-
-// const deleteMember = async (req, res) => {
-//   try {
-//     const getUser = await userModel.findById(req.params.id);
-//     // const content = await memberModel.findByIdAndRemove(req.params.member);
-
-//     getUser.member.pull(content);
-//     getUser.save();
-
-//     res.status(201).json({ message: "member deleted" });
-//   } catch (error) {
-//     res.status(404).json({ message: error.message });
-//   }
-// };
 
 const viewUser = async (req, res) => {
   try {
@@ -119,23 +89,20 @@ const updateUserLogo = async (req, res) => {
   }
 };
 
-const updateUserInfo = async (req, res) => {
+const onlineInfo = async (req, res) => {
   try {
-    const { fullName, displayName, careLine } = req.body;
     const user = await userModel.findById(req.params.id);
 
     if (user) {
       const viewUser = await userModel.findByIdAndUpdate(
         user._id,
         {
-          fullName,
-          careLine,
-          displayName,
+          online: true,
         },
         { new: true }
       );
       res.status(200).json({
-        message: "church updated",
+        message: "user is online",
         data: viewUser,
       });
     }

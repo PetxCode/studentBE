@@ -20,6 +20,6 @@ app.use("/api/interest", require("./router/interestRoute"));
 app.use("/api/software", require("./router/softwareRoute"));
 app.use("/api/project", require("./router/projectRoute"));
 
-app.listen(2400, () => {
+server.listen(2400, () => {
   console.log("server is now running");
 });
