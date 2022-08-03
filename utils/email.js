@@ -12,7 +12,7 @@ const oAuth = new google.auth.OAuth2(GOOGLE_ID, GOOGLE_SECRET, GOOGLE_REDIRECT);
 
 oAuth.setCredentials({ refresh_token: GOOGLE_REFRESHTOKEN });
 
-const url = "http://localhost:2400";
+const url = "http://localhost:3000";
 
 const verifiedUser = async (email, user, value) => {
   try {
