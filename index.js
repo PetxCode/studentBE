@@ -11,6 +11,10 @@ const room = {};
 app.use(cors());
 app.use(express.json());
 
+app.get((req, res) => {
+  res.status(200).json({ message: "This is a new built for Students" });
+});
+
 app.use("/api/user", require("./router/userRouter"));
 app.use("/api/interest", require("./router/interestRoute"));
 app.use("/api/software", require("./router/softwareRoute"));
