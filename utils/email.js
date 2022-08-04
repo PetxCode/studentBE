@@ -14,7 +14,7 @@ oAuth.setCredentials({ refresh_token: GOOGLE_REFRESHTOKEN });
 
 const url = "http://localhost:3000";
 
-const verifiedUser = async (email, user, value) => {
+const verifiedUser = async (email, user, value, token) => {
   try {
     const accessToken = await oAuth.getAccessToken();
     const transporter = nodemailer.createTransport({
@@ -41,6 +41,8 @@ const verifiedUser = async (email, user, value) => {
             This mail is to acknowledge that you are about to create an account as a student in CodeLab, please follow the link below to finish up your Registration.
               <br/>
               <br/>
+And here is your Secret Code "${token}" for Logging in, Please keep it safe and save as you'd be needing it to login successfully!
+
             Thanks!
              <br/>
              <br/>
