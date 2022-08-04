@@ -11,6 +11,15 @@ const userModel = mongoose.Schema(
     online: {
       type: Boolean,
     },
+    motivation: {
+      type: String,
+    },
+    futureAmbition: {
+      type: String,
+    },
+    aboutYou: {
+      type: String,
+    },
     secret: {
       type: String,
     },
