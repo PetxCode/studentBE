@@ -67,6 +67,28 @@ const updateUserImage = async (req, res) => {
   }
 };
 
+const offlineInfo = async (req, res) => {
+  try {
+    const user = await userModel.findById(req.params.id);
+
+    if (user) {
+      const viewUser = await userModel.findByIdAndUpdate(
+        user._id,
+        {
+          online: false,
+        },
+        { new: true }
+      );
+      res.status(200).json({
+        message: "user is online",
+        data: viewUser,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const onlineInfo = async (req, res) => {
   try {
     const user = await userModel.findById(req.params.id);
@@ -311,4 +333,5 @@ module.exports = {
   viewUser,
   signinUser,
   updateInfo,
+  offlineInfo,
 };
