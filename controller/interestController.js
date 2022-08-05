@@ -1,6 +1,7 @@
 const userModel = require("../model/userModel");
 const interestModel = require("../model/interestModel");
 const mongoose = require("mongoose");
+
 const createInterest = async (req, res) => {
   try {
     const { title } = req.body;
