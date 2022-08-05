@@ -5,11 +5,26 @@ const userModel = mongoose.Schema(
     code: {
       type: String,
     },
+    sponor: {
+      type: String,
+    },
+    promise: {
+      type: String,
+    },
+    video: {
+      type: String,
+    },
     verified: {
       type: Boolean,
     },
     online: {
       type: Boolean,
+    },
+    experience: {
+      type: Number,
+    },
+    phone: {
+      type: Number,
     },
     motivation: {
       type: String,

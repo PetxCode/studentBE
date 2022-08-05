@@ -113,7 +113,16 @@ const onlineInfo = async (req, res) => {
 
 const updateInfo = async (req, res) => {
   try {
-    const { userName, motivation, futureAmbition, aboutYou } = req.body;
+    const {
+      experience,
+      phone,
+      userName,
+      motivation,
+      futureAmbition,
+      aboutYou,
+      sponor,
+      video,
+    } = req.body;
     const user = await userModel.findById(req.params.id);
 
     if (user) {
@@ -124,6 +133,10 @@ const updateInfo = async (req, res) => {
           motivation,
           futureAmbition,
           aboutYou,
+          experience,
+          phone,
+          sponor,
+          video,
         },
         { new: true }
       );

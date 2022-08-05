@@ -35,7 +35,7 @@ const showStack = async (req, res) => {
     const getUser = await projectModel.findById(req.params.stack).populate({
       path: "stack",
       options: {
-        // limit: 3,
+        limit: 4,
         sort: { createdAt: -1 },
       },
     });
