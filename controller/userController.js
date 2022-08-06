@@ -122,6 +122,7 @@ const updateInfo = async (req, res) => {
       aboutYou,
       sponor,
       video,
+      promise,
     } = req.body;
     const user = await userModel.findById(req.params.id);
 
@@ -137,6 +138,7 @@ const updateInfo = async (req, res) => {
           phone,
           sponor,
           video,
+          promise,
         },
         { new: true }
       );
