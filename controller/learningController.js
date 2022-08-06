@@ -4,11 +4,14 @@ const mongoose = require("mongoose");
 
 const createLearning = async (req, res) => {
   try {
-    const { title } = req.body;
+    const { title, useCase, desc, course } = req.body;
 
     const getUser = await userModel.findById(req.params.id);
     const interested = new interestModel({
       title,
+      useCase,
+      desc,
+      course,
     });
 
     interested.user = getUser;
