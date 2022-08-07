@@ -42,6 +42,24 @@ db.on("open", () => {
   });
 });
 
+db.on("open", () => {
+  const observer = db.collection("stacks").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "insert") {
+      const newData = {
+        _id: change.fullDocument._id,
+        title: change.fullDocument.title,
+        createAt: change.fullDocument.createAt,
+      };
+      console.log(change.fullDocument);
+      console.log(change);
+
+      io.emit("newData", newData);
+    }
+  });
+});
+
 io.on("connection", (socket) => {
   // console.log("a user connected", socket.id);
 

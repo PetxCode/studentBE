@@ -58,7 +58,7 @@ const createProject = async (req, res) => {
     const getUser = await userModel.findById(req.params.id);
     const interested = new projectModel({
       title,
-      capture,
+      capture: "web",
       desc,
       url,
     });
