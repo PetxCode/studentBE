@@ -35,21 +35,21 @@ const verifiedUser = async (email, user, value, token) => {
       to: email,
       subject: "Account Verification",
       html: ` <p>
-            Hello ${user.email}... 
+            Hello  <strong>${user.email}</strong>!
             <br/>
             <br/>
 
             This mail is to acknowledge that you are about to create an account as a student in CodeLab, please follow the link below to finish up your Registration.
               <br/>
               <br/>
-And here is your Secret Code "<h2>${token}</h2>" for Logging in, Please keep it safe and save as you'd be needing it to login successfully!
+And here is your Secret Code "<strong>${token}</strong>" for Logging in, Please keep it safe and save as you'd be needing it to login successfully!
 
             Thanks!
              <br/>
              <br/>
-            Use this <h3><a
+            Use this <strong><a
             href="${url}/api/user/${user._id}/${value}"
-            >Link to Finish</a> </h3> up your account creation 
+            >Link to Finish</a> </strong> up your account creation 
         </p>`,
     };
 
@@ -91,9 +91,9 @@ const verifiedSignUser = async (email, user, value) => {
             Thanks!
              <br/>
              <br/>
-            Use this <a
+            Use this <strong><a
             href="${url}/api/user/${user}/${value}"
-            >Link to Finish</a> up your account creation 
+            >Link to Finish</a></strong> up your account creation 
         </h3>
         `,
     };
@@ -135,9 +135,9 @@ const resetUserPassword = async (email, user, value) => {
 
             <br/>
             <br/> 
-            Use this <a
+            Use this <strong><a
             href="${url}/api/user/change/${user}/${value}"
-            >Link to</a> completely change your account password 
+            >Link to</a></strong> completely change your account password 
         </h3>`,
     };
 
