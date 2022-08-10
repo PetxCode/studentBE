@@ -29,6 +29,20 @@ app.use("/api/gallary", require("./router/galleryRoute"));
 
 const db = mongoose.connection;
 
+// db.on("open", () => {
+//   const observer = db.collection("users").watch();
+
+//   observer.on("change", (change) => {
+//     if (change.operationType === "update") {
+//       const online = {
+//         // online: change.updateDescription.updatedFields.online,
+//         // updatedAt: change.updateDescription.updatedFields.updatedAt,
+//       };
+//       io.emit("online", online);
+//     }
+//   });
+// });
+
 db.on("open", () => {
   const observer = db.collection("users").watch();
 
@@ -57,6 +71,38 @@ db.on("open", () => {
       console.log(change);
 
       io.emit("newData", newData);
+    }
+  });
+});
+
+db.on("open", () => {
+  const observer = db.collection("gallarys").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "insert") {
+      const newData = {
+        _id: change.fullDocument._id,
+        image: change.fullDocument.image,
+        createAt: change.fullDocument.createAt,
+      };
+      console.log(change.fullDocument);
+      console.log(change);
+
+      io.emit("addGallary", newData);
+    }
+  });
+});
+
+db.on("open", () => {
+  const observer = db.collection("gallarys").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "delete") {
+      console.log(change);
+      const deleteData = {
+        _id: change.documentKey._id,
+      };
+      io.emit("delete", deleteData);
     }
   });
 });
