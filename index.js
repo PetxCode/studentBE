@@ -25,6 +25,7 @@ app.use("/api/interest", require("./router/interestRoute"));
 app.use("/api/software", require("./router/softwareRoute"));
 app.use("/api/project", require("./router/projectRoute"));
 app.use("/api/learning", require("./router/learningRoute"));
+app.use("/api/gallary", require("./router/galleryRoute"));
 
 const db = mongoose.connection;
 

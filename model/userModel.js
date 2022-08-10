@@ -83,6 +83,12 @@ const userModel = mongoose.Schema(
         ref: "projects",
       },
     ],
+    gallary: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "gallarys",
+      },
+    ],
   },
   { timestamps: true }
 );
