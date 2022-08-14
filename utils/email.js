@@ -137,7 +137,7 @@ const resetUserPassword = async (email, user, value) => {
             <br/>
             <br/> 
             Use this <strong><a
-            href="${server}/api/user/change/${user}/${value}"
+            href="${url}/api/user/change/${user}/${value}"
             >Link to</a></strong> completely change your account password 
         </p>`,
     };
