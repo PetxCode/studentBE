@@ -3,7 +3,7 @@ const cloudinary = require("../utils/cloudinary");
 
 const getPictures = async (req, res) => {
   try {
-    const pix = await pictureModel.find();
+    const pix = await pictureModel.find({}).sort({ createdAt: -1 });
     res.status(200).json({ message: "gotten", data: pix });
   } catch (error) {
     res.status(404).json({ message: error.message });
