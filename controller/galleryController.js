@@ -76,17 +76,21 @@ const showAllGallery = async (req, res) => {
 const deleteGallery = async (req, res) => {
   try {
     const getUser = await userModel.findById(req.params.id);
+
     const deleteData = await interestModel.findByIdAndRemove(
       req.params.gallary
     );
 
-    getUser.gallary.pull(deleteData);
-    getUser.save();
+    if (deleteGallery) {
+      await cloudinary.uploader.destroy(deleteGallery.imageID);
+      getUser.gallary.pull(deleteData);
+      getUser.save();
 
-    res.status(200).json({
-      status: "deleted",
-      data: getUser,
-    });
+      res.status(200).json({
+        status: "deleted",
+        data: getUser,
+      });
+    }
   } catch (err) {
     res.status(404).json({
       status: err.message,

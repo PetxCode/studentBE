@@ -47,21 +47,24 @@ const deleteUser = async (req, res) => {
 
 const updateUserImage = async (req, res) => {
   try {
-    const image = await cloudinary.uploader.upload(req.file.path);
-    console.log(req.file.path, image);
+    const pixID = await userModel.findById(req.params.id);
 
-    const viewUser = await userModel.findByIdAndUpdate(
-      req.params.id,
-      {
-        avatar: image.secure_url,
-        avatarID: image.public_id,
-      },
-      { new: true }
-    );
-    res.status(200).json({
-      message: "church updated",
-      data: viewUser,
-    });
+    if (pixID) {
+      await cloudinary.uploader.destroy(pixID.avatarID);
+      const image = await cloudinary.uploader.upload(req.file.path);
+      const viewUser = await userModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          avatar: image.secure_url,
+          avatarID: image.public_id,
+        },
+        { new: true }
+      );
+      res.status(200).json({
+        message: "church updated",
+        data: viewUser,
+      });
+    }
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
