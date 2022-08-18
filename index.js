@@ -33,49 +33,42 @@ app.use("/api/voteStudent", require("./router/voteStudentRouter"));
 const db = mongoose.connection;
 
 db.on("open", () => {
-  const observer = db.collection("voteInstructors").watch();
+  const observer = db.collection("voteinstructors").watch();
 
   observer.on("change", (change) => {
     if (change.operationType === "insert") {
-      io.emit("instructor");
+      io.emit("instructorsData");
     }
   });
 });
 
 db.on("open", () => {
-  const observer = db.collection("voteStudents").watch();
+  const observer = db.collection("voteinstructors").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "update") {
+      console.log(change);
+      io.emit("instructorsVote");
+    }
+  });
+});
+
+db.on("open", () => {
+  const observer = db.collection("votestudents").watch();
 
   observer.on("change", (change) => {
     if (change.operationType === "insert") {
-      io.emit("student");
+      io.emit("studentsData");
     }
   });
 });
 
 db.on("open", () => {
-  const observer = db.collection("voteInstructors").watch();
+  const observer = db.collection("votestudents").watch();
 
   observer.on("change", (change) => {
     if (change.operationType === "update") {
-      const instructor = {
-        _id: change.updateDescription.updatedFields._id,
-        updatedAt: change.updateDescription.updatedFields.updatedAt,
-      };
-      io.emit("instructor", instructor);
-    }
-  });
-});
-
-db.on("open", () => {
-  const observer = db.collection("voteStudents").watch();
-
-  observer.on("change", (change) => {
-    if (change.operationType === "update") {
-      const student = {
-        _id: change.updateDescription.updatedFields._id,
-        updatedAt: change.updateDescription.updatedFields.updatedAt,
-      };
-      io.emit("student", student);
+      io.emit("studentsVote");
     }
   });
 });
@@ -120,7 +113,6 @@ db.on("open", () => {
         image: change.fullDocument.image,
         createAt: change.fullDocument.createAt,
       };
-
       io.emit("newData", newData);
     }
   });
