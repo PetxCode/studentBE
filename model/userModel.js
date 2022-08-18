@@ -89,6 +89,10 @@ const userModel = mongoose.Schema(
         ref: "gallarys",
       },
     ],
+    voteInstructor: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "voteInstructors",
+    },
   },
   { timestamps: true }
 );

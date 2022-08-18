@@ -27,6 +27,8 @@ app.use("/api/project", require("./router/projectRoute"));
 app.use("/api/learning", require("./router/learningRoute"));
 app.use("/api/gallary", require("./router/galleryRoute"));
 app.use("/api/picture", require("./router/pictureRoute"));
+app.use("/api/voteIntructor", require("./router/voteRouter"));
+app.use("/api/voteStudent", require("./router/voteStudentRouter"));
 
 const db = mongoose.connection;
 
