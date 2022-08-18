@@ -42,6 +42,19 @@ const getVoteEntry = async (req, res) => {
   }
 };
 
+const get2VoteEntry = async (req, res) => {
+  try {
+    const newEntry = await voteInstructorModel
+      .find({})
+      .sort({ createdAt: -1 })
+      .limit(2);
+
+    res.status(200).json({ message: "View Student", data: newEntry });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const deleteVoteEntry = async (req, res) => {
   try {
     await voteInstructorModel.deleteMany();
@@ -90,4 +103,5 @@ module.exports = {
   getVoteEntry,
   deleteVoteEntry,
   VoteEntry,
+  get2VoteEntry,
 };
