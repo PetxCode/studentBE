@@ -33,6 +33,54 @@ app.use("/api/voteStudent", require("./router/voteStudentRouter"));
 const db = mongoose.connection;
 
 db.on("open", () => {
+  const observer = db.collection("voteInstructors").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "insert") {
+      io.emit("instructor");
+    }
+  });
+});
+
+db.on("open", () => {
+  const observer = db.collection("voteStudents").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "insert") {
+      io.emit("student");
+    }
+  });
+});
+
+db.on("open", () => {
+  const observer = db.collection("voteInstructors").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "update") {
+      const instructor = {
+        _id: change.updateDescription.updatedFields._id,
+        updatedAt: change.updateDescription.updatedFields.updatedAt,
+      };
+      io.emit("instructor", instructor);
+    }
+  });
+});
+
+db.on("open", () => {
+  const observer = db.collection("voteStudents").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "update") {
+      const student = {
+        _id: change.updateDescription.updatedFields._id,
+        updatedAt: change.updateDescription.updatedFields.updatedAt,
+      };
+      io.emit("student", student);
+    }
+  });
+});
+
+db.on("open", () => {
   const observer = db.collection("users").watch();
 
   observer.on("change", (change) => {

@@ -9,6 +9,7 @@ const createVoteEntry = async (req, res) => {
     const newEntry = await voteInstructorModel.create({
       name,
       course,
+      role: "Student",
       image: image.secure_url,
       imageID: image.public_id,
     });
