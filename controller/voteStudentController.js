@@ -64,9 +64,18 @@ const deleteVoteEntry = async (req, res) => {
   }
 };
 
+const Vote = async (req, res) => {
+  try {
+    const voted = await voteInstructorModel.findById(req.params.id);
+
+    res.status(201).json({ message: "voted", data: voted });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const VoteEntry = async (req, res) => {
   try {
-    const getUser = await voteInstructorModel.findById(req.params.id);
     const voted = await voteInstructorModel.findByIdAndUpdate(
       req.params.id,
       {
@@ -75,15 +84,19 @@ const VoteEntry = async (req, res) => {
       { new: true }
     );
 
+    const getUser = await voteInstructorModel.findById(req.params.id);
+    const voterData = getUser.user.length;
+    console.log("voter: ", voterData);
+
     await voteInstructorModel.findByIdAndUpdate(
       req.params.id,
       {
-        voter: getUser.user.length,
+        voter: voterData,
       },
       { new: true }
     );
 
-    res.status(201).json({ message: "voted", data: voted });
+    res.status(201).json({ message: "voted", data: { voted, voterData } });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -91,8 +104,6 @@ const VoteEntry = async (req, res) => {
 
 const deleteVote = async (req, res) => {
   try {
-    const getUser = await voteInstructorModel.findById(req.params.id);
-
     const voted = await voteInstructorModel.findByIdAndUpdate(
       req.params.id,
       {
@@ -101,15 +112,22 @@ const deleteVote = async (req, res) => {
       { new: true }
     );
 
+    const getUser = await voteInstructorModel.findById(req.params.id);
+    const voterData = getUser.user.length;
+    console.log("voter delete: ", voterData);
+
     await voteInstructorModel.findByIdAndUpdate(
       req.params.id,
       {
-        voter: getUser.user.length,
+        voter: voterData,
       },
       { new: true }
     );
 
-    res.status(201).json({ message: "vote Deleted", data: voted });
+    // console.log("view Delete: ", getUser.user.length);
+    res
+      .status(201)
+      .json({ message: "vote Deleted", data: { voted, voterData } });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -123,4 +141,5 @@ module.exports = {
   deleteVoteEntry,
   VoteEntry,
   get2VoteEntry,
+  Vote,
 };
