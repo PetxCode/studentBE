@@ -11,6 +11,12 @@ const eventModel = mongoose.Schema(
     date: {
       type: String,
     },
+    month: {
+      type: String,
+    },
+    time: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

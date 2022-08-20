@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 
 const voteInstructorModel = mongoose.Schema(
   {
+    voter: {
+      type: Number,
+    },
     name: {
       type: String,
     },

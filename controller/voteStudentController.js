@@ -66,10 +66,19 @@ const deleteVoteEntry = async (req, res) => {
 
 const VoteEntry = async (req, res) => {
   try {
+    const getUser = await voteInstructorModel.findById(req.params.id);
     const voted = await voteInstructorModel.findByIdAndUpdate(
       req.params.id,
       {
         $push: { user: req.params.voterID },
+      },
+      { new: true }
+    );
+
+    await voteInstructorModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        voter: getUser.user.length,
       },
       { new: true }
     );
@@ -82,10 +91,20 @@ const VoteEntry = async (req, res) => {
 
 const deleteVote = async (req, res) => {
   try {
+    const getUser = await voteInstructorModel.findById(req.params.id);
+
     const voted = await voteInstructorModel.findByIdAndUpdate(
       req.params.id,
       {
         $pull: { user: req.params.voterID },
+      },
+      { new: true }
+    );
+
+    await voteInstructorModel.findByIdAndUpdate(
+      req.params.id,
+      {
+        voter: getUser.user.length,
       },
       { new: true }
     );

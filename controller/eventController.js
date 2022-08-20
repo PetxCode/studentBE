@@ -20,14 +20,40 @@ const getEvent = async (req, res) => {
 
 const createEvent = async (req, res) => {
   try {
-    const { title, desc, date } = req.body;
+    const { title, desc, date, month, time } = req.body;
 
     const pix = await eventModel.create({
       title,
       desc,
       date,
+      month,
+      time,
     });
     res.status(200).json({ message: "gotten", data: pix });
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+const editEvent = async (req, res) => {
+  try {
+    const { title, desc, date, month, time } = req.body;
+    const pixID = await eventModel.findById(req.params.id);
+
+    if (pixID) {
+      const pix = await eventModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          title,
+          desc,
+          date,
+          month,
+          time,
+        },
+        { new: true }
+      );
+      res.status(200).json({ message: "Edited", data: pix });
+    }
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -53,4 +79,5 @@ module.exports = {
   createEvent,
   getEvent,
   getEvents,
+  editEvent,
 };
