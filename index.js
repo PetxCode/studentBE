@@ -29,6 +29,7 @@ app.use("/api/gallary", require("./router/galleryRoute"));
 app.use("/api/picture", require("./router/pictureRoute"));
 app.use("/api/voteIntructor", require("./router/voteRouter"));
 app.use("/api/voteStudent", require("./router/voteStudentRouter"));
+app.use("/api/event", require("./router/eventRouter"));
 
 const db = mongoose.connection;
 
@@ -41,6 +42,16 @@ db.on("open", () => {
     }
   });
 });
+
+// db.on("open", () => {
+//   const observer = db.collection("events").watch();
+
+//   observer.on("change", (change) => {
+//     if (change.operationType === "insert") {
+//       io.emit("eventNote");
+//     }
+//   });
+// });
 
 db.on("open", () => {
   const observer = db.collection("voteinstructors").watch();

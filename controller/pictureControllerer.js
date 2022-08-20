@@ -21,9 +21,11 @@ const getPicture = async (req, res) => {
 
 const createPicture = async (req, res) => {
   try {
+    const { title } = req.body;
     const pixData = await cloudinary.uploader.upload(req.file.path);
 
     const pix = await pictureModel.create({
+      title,
       image: pixData.secure_url,
       imageID: pixData.public_id,
     });

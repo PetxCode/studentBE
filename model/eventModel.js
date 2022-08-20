@@ -1,18 +1,18 @@
 const mongoose = require("mongoose");
 
-const pictureModel = mongoose.Schema(
+const eventModel = mongoose.Schema(
   {
     title: {
       type: String,
     },
-    image: {
+    desc: {
       type: String,
     },
-    imageID: {
+    date: {
       type: String,
     },
   },
   { timestamps: true }
 );
 
-module.exports = mongoose.model("pictures", pictureModel);
+module.exports = mongoose.model("eventNotes", eventModel);
