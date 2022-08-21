@@ -20,7 +20,7 @@ const getEvent = async (req, res) => {
 
 const createEvent = async (req, res) => {
   try {
-    const { title, desc, date, month, time } = req.body;
+    const { title, desc, date, month, time, year } = req.body;
 
     const pix = await eventModel.create({
       title,
@@ -28,6 +28,7 @@ const createEvent = async (req, res) => {
       date,
       month,
       time,
+      year,
     });
     res.status(200).json({ message: "gotten", data: pix });
   } catch (error) {
@@ -49,6 +50,7 @@ const editEvent = async (req, res) => {
           date,
           month,
           time,
+          year,
         },
         { new: true }
       );
