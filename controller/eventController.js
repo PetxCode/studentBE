@@ -59,6 +59,44 @@ const editEvent = async (req, res) => {
   }
 };
 
+const doneEvent = async (req, res) => {
+  try {
+    const pixID = await eventModel.findById(req.params.id);
+
+    if (pixID) {
+      const pix = await eventModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          done: true,
+        },
+        { new: true }
+      );
+      res.status(200).json({ message: "Edited", data: pix });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
+const unDoneEvent = async (req, res) => {
+  try {
+    const pixID = await eventModel.findById(req.params.id);
+
+    if (pixID) {
+      const pix = await eventModel.findByIdAndUpdate(
+        req.params.id,
+        {
+          done: false,
+        },
+        { new: true }
+      );
+      res.status(200).json({ message: "Edited", data: pix });
+    }
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 const deleteEvents = async (req, res) => {
   try {
     const pixID = await eventModel.findById(req.params.id);
@@ -80,4 +118,6 @@ module.exports = {
   getEvent,
   getEvents,
   editEvent,
+  unDoneEvent,
+  doneEvent,
 };
