@@ -1,44 +1,51 @@
 const mongoose = require("mongoose");
 
-const learningModel = mongoose.Schema(
+const statModel = mongoose.Schema(
   {
     rate: {
       type: Number,
     },
-
-    Course: {
+    course: {
       type: String,
     },
+
     rate1: {
       type: Number,
     },
-
-    Course1: {
+    course1: {
       type: String,
     },
 
     rate2: {
       type: Number,
     },
-
-    Course2: {
+    course2: {
       type: String,
     },
 
     rate3: {
       type: Number,
     },
-
-    Course3: {
+    course3: {
       type: String,
     },
 
     rate4: {
       type: Number,
     },
-
-    Course4: {
+    course4: {
       type: String,
+    },
+
+    rate5: {
+      type: Number,
+    },
+    course5: {
+      type: String,
+    },
+
+    sum: {
+      type: Number,
     },
 
     weekly: [
@@ -56,4 +63,4 @@ const learningModel = mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("learnings", learningModel);
+module.exports = mongoose.model("stats", statModel);

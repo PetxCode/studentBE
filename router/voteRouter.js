@@ -1,7 +1,6 @@
 const express = require("express");
 const upload = require("../utils/multer");
 const {
-  showAllGallery,
   deleteVote,
   createVoteEntry,
   getVoteEntry,

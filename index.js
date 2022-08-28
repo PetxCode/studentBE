@@ -30,8 +30,20 @@ app.use("/api/picture", require("./router/pictureRoute"));
 app.use("/api/voteIntructor", require("./router/voteRouter"));
 app.use("/api/voteStudent", require("./router/voteStudentRouter"));
 app.use("/api/event", require("./router/eventRouter"));
+app.use("/api/stat", require("./router/statRoute"));
+app.use("/api/weeklystat", require("./router/weekStatRoute"));
 
 const db = mongoose.connection;
+
+db.on("open", () => {
+  const observer = db.collection("stats").watch();
+
+  observer.on("change", (change) => {
+    if (change.operationType === "insert") {
+      io.emit("stat");
+    }
+  });
+});
 
 db.on("open", () => {
   const observer = db.collection("voteinstructors").watch();
@@ -129,19 +141,19 @@ db.on("open", () => {
   });
 });
 
-db.on("open", () => {
-  const observer = db.collection("pictures").watch();
+// db.on("open", () => {
+//   const observer = db.collection("pictures").watch();
 
-  observer.on("change", (change) => {
-    if (change.operationType === "delete") {
-      console.log(change);
-      const deleteData = {
-        _id: change.documentKey._id,
-      };
-      io.emit("delete", deleteData);
-    }
-  });
-});
+//   observer.on("change", (change) => {
+//     if (change.operationType === "delete") {
+//       console.log(change);
+//       const deleteData = {
+//         _id: change.documentKey._id,
+//       };
+//       io.emit("delete", deleteData);
+//     }
+//   });
+// });
 
 db.on("open", () => {
   const observer = db.collection("gallarys").watch();
