@@ -5,6 +5,7 @@ const voteStudentModel = mongoose.Schema(
     voter: {
       type: Number,
     },
+
     name: {
       type: String,
     },
