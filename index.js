@@ -17,7 +17,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "This is a new built for students" });
+  res.status(200).json({ message: "This is a new built for CodeLab students" });
 });
 
 app.use("/api/user", require("./router/userRouter"));
