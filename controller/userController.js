@@ -177,6 +177,7 @@ const createUser = async (req, res) => {
         .then((result) => {
           console.log("sent: ", result);
         })
+        
         .catch((error) => {
           console.log(error);
         });

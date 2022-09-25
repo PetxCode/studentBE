@@ -31,19 +31,20 @@ app.use("/api/voteIntructor", require("./router/voteRouter"));
 app.use("/api/voteStudent", require("./router/voteStudentRouter"));
 app.use("/api/event", require("./router/eventRouter"));
 app.use("/api/stat", require("./router/statRoute"));
+app.use("/api/stat2", require("./router/stat2Router"));
 app.use("/api/weeklystat", require("./router/weekStatRoute"));
 
 const db = mongoose.connection;
 
-db.on("open", () => {
-  const observer = db.collection("stats").watch();
+// db.on("open", () => {
+//   const observer = db.collection("stat2s").watch();
 
-  observer.on("change", (change) => {
-    if (change.operationType === "insert") {
-      io.emit("stat");
-    }
-  });
-});
+//   observer.on("change", (change) => {
+//     if (change.operationType === "insert") {
+//       io.emit("stat2");
+//     }
+//   });
+// });
 
 db.on("open", () => {
   const observer = db.collection("voteinstructors").watch();

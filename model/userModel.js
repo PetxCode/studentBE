@@ -77,6 +77,12 @@ const userModel = mongoose.Schema(
         ref: "stats",
       },
     ],
+    stat2: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "stat2s",
+      },
+    ],
     learning: [
       {
         type: mongoose.Schema.Types.ObjectId,

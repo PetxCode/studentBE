@@ -1,5 +1,5 @@
 const userModel = require("../model/userModel");
-const statModel = require("../model/statModel");
+const statModel = require("../model/stat2Model");
 const mongoose = require("mongoose");
 
 const createStat = async (req, res) => {
@@ -9,15 +9,11 @@ const createStat = async (req, res) => {
       rate1,
       rate2,
       rate3,
-      rate4,
-      rate5,
 
       course,
       course1,
       course2,
       course3,
-      course4,
-      course5,
     } = req.body;
 
     const getUser = await userModel.findById(req.params.id);
@@ -26,27 +22,23 @@ const createStat = async (req, res) => {
       rate1,
       rate2,
       rate3,
-      rate4,
-      rate5,
 
       course,
       course1,
       course2,
       course3,
-      course4,
-      course5,
 
-      sum: Math.ceil((rate + rate1 + rate2 + rate3 + rate4 + rate5) / 6),
+      sum: Math.ceil(parseInt(rate + rate1 + rate2 + rate3) / 4),
     });
 
     addStat.user = getUser;
     addStat.save();
 
-    getUser.stat.push(mongoose.Types.ObjectId(addStat._id));
+    getUser.stat2.push(mongoose.Types.ObjectId(addStat._id));
     getUser.save();
 
     res.status(201).json({
-      status: "stat record has been added successfully",
+      status: "stat2 record has been added successfully",
       data: addStat,
     });
   } catch (error) {
@@ -57,7 +49,7 @@ const createStat = async (req, res) => {
 const readStat = async (req, res) => {
   try {
     const getStat = await userModel.findById(req.params.id).populate({
-      path: "stat",
+      path: "stat2",
       options: { createdAt: -1 },
     });
     res.status(201).json({
@@ -75,7 +67,7 @@ const deleteStat = async (req, res) => {
 
     const deleteState = await statModel.findByIdAndRemove(req.params.statID);
 
-    getStat.stat.pull(deleteState);
+    getStat.stat2.pull(deleteState);
     getStat.save();
 
     res.status(200).json({
